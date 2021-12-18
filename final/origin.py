@@ -1,6 +1,4 @@
-
-# TODO : Close browser  at last
-
+#TODO: Close the browser at last
 
 # import modules
 import sys

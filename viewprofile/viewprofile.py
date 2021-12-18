@@ -53,6 +53,7 @@ class followedSection:
         while True:
             browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(1)
+            # browser.implicitly_wait(2)
             newheight=browser.execute_script("return document.body.scrollHeight")
             print('Next Height: ',newheight)
             if newheight==initialheight:
@@ -69,6 +70,7 @@ class followedSection:
             self.clickOnViewProfile()
             self.clickOnSolutions()
             time.sleep(2)
+            # browser.implicitly_wait(2)
             self.fullscreen()
         except ElementNotInteractableException:
             print("Hover is visible? " +

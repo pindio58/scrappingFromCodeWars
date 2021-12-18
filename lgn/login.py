@@ -24,20 +24,22 @@ LOGINBYGITHUB = '//*[@id="new_user"]/button[1]'
 EMAILPATH = '//*[@id="user_email"]'
 PASSWORDPATH = '//*[@id="user_password"]'
 DRIVERPATH = os.environ['DRIVERFULLPATH']
-EMAILFIELD='login_field'
-PASSWORDFIELD='password'
+EMAILFIELD = 'login_field'
+PASSWORDFIELD = 'password'
 service = Service(executable_path=DRIVERPATH)
-browser = webdriver.Chrome(service=service)                         # This single line opens a (empty) browser 
-browser.maximize_window()                                                      # comnet this
+# This single line opens a (empty) browser
+browser = webdriver.Chrome(service=service)
+# comnet this
+browser.maximize_window()
 
 
 class loggingIn:
 
     def __init__(self):
         pass
-    
+
     #  click on github
-    def signInWithGitHub(self,url=url,LOGINBYGITHUB=LOGINBYGITHUB):
+    def signInWithGitHub(self, url=url, LOGINBYGITHUB=LOGINBYGITHUB):
         browser.get(url)
         element = browser.find_element(By.XPATH, value=LOGINBYGITHUB)
         element.click()
@@ -45,7 +47,7 @@ class loggingIn:
         # TODO: To take care of authorization when logged in too many times
         
     # fill in details
-    def loggedin(self,emailfield=EMAILFIELD,passwordfiled=PASSWORDFIELD):
+    def loggedin(self, emailfield=EMAILFIELD, passwordfiled=PASSWORDFIELD):
         emailelement = browser.find_element(By.ID, value=emailfield)
         passwordelement = browser.find_element(By.ID, value=passwordfiled)
         emailelement.send_keys(username)
@@ -53,9 +55,10 @@ class loggingIn:
         passwordelement.submit()
 
     def main(self):
-        self.signInWithGitHub(url,LOGINBYGITHUB)
-        self.loggedin(EMAILFIELD,PASSWORDFIELD)
+        self.signInWithGitHub(url, LOGINBYGITHUB)
+        self.loggedin(EMAILFIELD, PASSWORDFIELD)
+
 
 if __name__ == '__main__':
-    logi=loggingIn()
+    logi = loggingIn()
     logi.main()

@@ -1,7 +1,7 @@
 #import modules
 import sys
 import pathlib
-
+import re
 from selenium.webdriver.common.by import By
 sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
 from viewprofile.viewprofile import followedSection
@@ -24,10 +24,14 @@ follow.main()
 # ===========================================================================================
 
 browser=viewprofile.browser
-TOTALCOUNT=44
+TOTALCOUNT=45
 # test1='//*[@id="shell_content"]/div[5]/div/div[2]/div[1]/div[1]/a'
 # test2='//*[@id="shell_content"]/div[5]/div/div[2]/div[2]/div[1]/a'
 firstSolution='//*[@id="shell_content"]/div[5]/div/div[2]/div[{}]/div[1]/a'
-# for i in range(1,TOTALCOUNT):
-#     element=browser.find_element(By.XPATH, value=firstSolution.format(i))                                        # or by=
-#     print(element.text)
+for i in range(1,TOTALCOUNT):
+    element=browser.find_element(By.XPATH, value=firstSolution.format(i))                                        # or by=
+    print(element.text)
+
+numberOfRepos=browser.find_element(By.XPATH,value='//*[@id="shell_content"]/div[5]/div/div[1]/ul/li[1]/a').text
+print('Completed Solutions: ', int(re.search(r'\d+', numberOfRepos).group()))
+browser.close()    

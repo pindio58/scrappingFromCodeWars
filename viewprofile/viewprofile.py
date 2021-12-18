@@ -48,9 +48,17 @@ class followedSection:
         solution.click()
 
     def fullscreen(self):
-        print(browser.execute_script("return document.body.scrollHeight"))
-        browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        print(browser.execute_script("return document.body.scrollHeight"))
+        initialheight=browser.execute_script("return document.body.scrollHeight")
+        print('First Height: ',initialheight)
+        while True:
+            browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(1)
+            newheight=browser.execute_script("return document.body.scrollHeight")
+            print('Next Height: ',newheight)
+            if newheight==initialheight:
+                break
+            else:
+                initialheight=newheight
         # browser.execute_script("window.scrollTo(0, 1080)") 
         # browser.execute_script("var scrollingElement = (document.scrollingElement || document.body);scrollingElement.scrollTop = scrollingElement.scrollHeight;")
 

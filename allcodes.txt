@@ -1,0 +1,678 @@
+Codes
+
+Calculating Month-Over-Month Percentage Growth Rate:
+-- Replace with your SQL query
+with cte as(
+select date, count(1) "count" from(
+select  cast(date_trunc('month', created_at) as date) "date"
+from posts) det
+group by date
+order by date),
+cte2 as (
+select date,count,count-lag(count,1) over(order by date) "diff" from cte
+  )
+select date,count, 
+round(cast(diff/(cast(lag(count,1) over(order by date)  as float))*100 as 
+     numeric),1)|| '%' "percent_growth"
+from cte2;:
+
+Keep Hydrated!:
+SELECT id, hours, floor(hours/2) "liters" FROM cycling;:
+
+Maximum Length Difference:
+def mxdiflg(a1, a2):
+    if (not a1) or (not a2):
+        return -1
+    min1=len(min(a1 , key=len))
+    max1=len(max(a1 , key=len))
+    min2=len(min(a2 , key=len))
+    max2=len(max(a2 , key=len))
+    
+    return max(abs(min1-max2), abs(min2-max1)):
+
+Returning Strings:
+def greet(name):
+    return 'Hello, {} how are you doing today?'.format(name):
+
+Closest Perfect Power:
+#import numpy module
+import numpy as np
+
+#This function will calculate the roots from 2 till 10th
+def sub_function(num):
+    roots=[num**(1/float(val)) for val in range(2,10)]
+    return roots
+
+def closest_power(num):
+    if num<=4:
+        return 4
+    
+    num=round(num)                                               # round the value to nearest
+    arr=[]                                                       # initiated empty array
+    
+    roots=list(map(round,sub_function(num)))                    # rounded roots
+    
+    for root in roots:
+        for val in range(2,10):
+            power=root**val
+            arr.append(power)
+    
+    arr=np.array(arr)
+    difference=min(abs(arr-num))
+    
+    return int(min(arr[abs(arr-num)==difference])):
+
+Consecutive strings:
+def longest_consec(strarr, k):
+    if not strarr:
+        return ''
+    if (not k) or (k<=0):
+        return ''
+    if k>len(strarr):
+        return ''
+    ourDict,counter={},0
+    for num in range(len(strarr)-k+1):
+        word=''.join(strarr[counter:k])
+        ourDict[word]=len(word)
+        counter+=1; k+=1
+    return max(ourDict, key=ourDict.get):
+
+Find The Parity Outlier:
+import numpy as np
+def find_outlier(integers):
+    arr = np.array(integers)
+    
+    if [0,1,2] in arr:
+        return 1
+    
+    odds=arr[arr%2==1]
+    return arr[~arr%2==1][0] if odds.size>1  else odds[0]:
+
+Duplicate Encoder:
+from collections import Counter
+def duplicate_encode(word):
+    data = Counter(word.lower())
+    lis= [ ')' if data[letter.lower()]>1 else '(' for letter in word ]
+    lis=''.join(lis)
+    return lis:
+
+Counting Duplicates:
+from collections import Counter
+def duplicate_count(text):
+    text=text.lower()
+    values=Counter(text) 
+    return len(list(filter(lambda x:values[x]>1 ,values)))
+    :
+
+The observed PIN:
+from itertools import product
+def get_pins(observed):
+    our_dict={
+        '1':[1,2,4],
+        '2':[1,2,3,5],
+        '3':[2,3,6],
+        '4':[1,4,5,7],
+        '5':[2,4,5,6,8],
+        '6':[3,5,6,9],
+        '7':[4,7,8],
+        '8':[5,7,8,9,0],
+        '9':[6,8,9],
+        '0':[0,8]
+    }
+    our_list=list(str(observed))
+    
+    x=[our_dict[num] for num in our_list]
+    k=list(product(*x))
+    p=[]
+    
+    for kk in k:
+        p.append(''.join(str(e) for e in kk))
+    
+    return p:
+
+IP Validation:
+#!/bin/bash
+adr="$1"
+echo "$adr" | grep -q "^[1-9]*\.[1-9]*\.[1-9]*\.[1-9]$"
+if [ ! $? = 0 ]; then
+    # echo aajo
+  echo False
+else
+  echo True
+fi:
+
+Remove String Spaces:
+var="$1"
+echo $var | sed 's/ //g':
+
+Who likes it?:
+def likes(names):
+    
+    if not names:
+        return 'no one likes this'
+    
+    if len(names)==1:
+        return '{} likes this'.format(names[0])
+
+    if len(names)==2:
+        return '{} and {} like this'.format(names[0], names[1])
+
+    if len(names)==3:
+        return '{}, {} and {} like this'.format(names[0], names[1], names[2])
+
+    if len(names):
+        return '{}, {} and {} others like this'.format(names[0],names[1], len(names)-2):
+
+Is a number prime?:
+/*This was answered taking help from google, I had answer but was too slow, 
+being a newbie to java, taken help */
+public class Prime {
+
+  public static boolean isPrime(long n) {
+      if(n < 2) return false;
+      if(n == 2 || n == 3) return true;
+      if(n%2 == 0 || n%3 == 0) return false;
+      long sqrtN = (long)Math.sqrt(n)+1;
+      for(long i = 6L; i <= sqrtN; i += 6) {
+          if(n%(i-1) == 0 || n%(i+1) == 0) return false;
+      }
+      return true;
+  }
+  
+  }:
+
+Break camelCase:
+class Solution {
+      public static String camelCase(String input) {
+      //System.out.println(input);
+      return input.replaceAll("([A-Z])", " $1"); 
+    }
+  }:
+
+Tribonacci Sequence:
+import java.util.Arrays;
+public class Xbonacci {
+
+  public  double[] tribonacci(double[] s, int n) {
+    System.out.println(Arrays.toString(s));
+    System.out.println(n);    
+    
+      double[] ret = new double[n];
+      double num=0;
+      if (n==0) {
+        return ret;
+      } else{
+       
+        for(int x =0;x<Math.min(3.0,n);x++) {
+          ret[x]=s[x];
+          num+=s[x];
+        }
+        
+      };
+      
+    if (n<3) {
+      return ret;
+    } else{
+      ret[3]=num;
+    }
+      
+      
+      for (int x=4; x<n;x++) {
+        ret[x]=ret[x-1]+ret[x-2]+ret[x-3];
+      }
+      ;
+      return ret;
+        
+    }
+}:
+
+Take a Ten Minute Walk:
+import java.util.HashMap;
+import java.util.Map;
+
+public class TenMinWalk {
+  public static boolean isValid(char[] walk) {
+      if(walk.length!=10) return false;
+      //System.out.println(walk);
+      Map<Character, Integer> dictionary = new HashMap<Character, Integer>();
+     
+      for (char ch: walk) {
+       if (!dictionary.containsKey(ch)) {
+         dictionary.put(ch, 0);
+       } else{
+         dictionary.put(ch, dictionary.get(ch)+1);
+       };
+       
+     }
+     
+//      System.out.println(dictionary.keySet().toArray()[0]);
+      
+    if (dictionary.size()==1  || dictionary.size()==3) return false;
+      
+    if (dictionary.size()==2) {
+      if (dictionary.get(dictionary.keySet().toArray()[0]) != dictionary.get(dictionary.keySet().toArray()[1])) return false;
+    }
+    
+    
+    if ((dictionary.get('n')!=dictionary.get('s'))||((dictionary.get('e')!=dictionary.get('w')))) return false;
+    
+    return true;
+  }
+}:
+
+Multiples of 3 or 5:
+public class Solution {
+
+  public int solution(int number) {
+    int count=0;
+      int sum=0;
+      while(count<number) {
+        if(count%3==0 || count%5==0) sum+=count;
+        count++;
+      }
+      
+      return sum;
+  }
+}:
+
+Convert to Binary:
+public class Kata {
+
+  public static int toBinary(int n) {
+    return Integer.parseInt(Integer.toBinaryString(n));
+  }
+
+}:
+
+Valid Phone Number:
+# echo "$1"
+if  [[ $1 =~ [a-zA-Z]+$ ]] ; then 
+  echo "False";
+  exit
+fi
+read -a ARRAY <<< $(echo "$1" | sed 's/ /k/g' | sed 's/./& /g')
+#echo "${ARRAY[*]}"
+if [ ${ARRAY[0]} = '(' ] &&  [ ${ARRAY[4]} = ')' ] &&  [ ${ARRAY[5]} = 'k' ] &&  [ ${ARRAY[9]} = '-' ]; then
+  echo 'True'
+else
+  echo 'False'
+fi:
+
+Expressions Matter:
+a=$1
+b=$2
+c=$3
+# your code here
+num1=$(( $a*$b+$c ))
+num2=$(( $a+$b+$c ))
+num3=$(( $a*$b*$c ))
+num4=$(( $a*($b+$c) ))
+num5=$(( $a+($b*$c) ))
+num6=$(( ($a+$b)*$c ))
+ar=( $num1 $num2 $num3 $num4 $num5 $num6)
+IFS=$'\n'
+
+echo "${ar[*]}" | sort -nr | head -1:
+
+Grasshopper - Messi goals function:
+laLigaGoals=$1
+copaDelReyGoals=$2
+championsLeagueGoals=$3
+echo $(( $1 + $2 + $3 )):
+
+Most frequently used words in a text:
+def top_3_words(text):
+    if not text: return []
+    if set(text)=={" ","'"}: return []
+    
+    sp= list ('!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~')
+    
+    for tx in text:
+        if tx in sp: text=text.replace(tx,' ')
+    text = [x.lower() for x in text.split()]
+    text = dict( zip( list(set(text)), [text.count(x) for x in set(text)]))
+    text = {k: v for k, v in sorted(text.items(), key=lambda item: item[1], reverse=True)}
+    
+    if len(text)<2: return [k for k in list(text)[:1]]
+    if len(text)<3: return [k for k in list(text)[:2]]
+    
+    return [k  for k in list(text)[:3]]:
+
+Easy SQL: Counting and Grouping:
+/*  SQL  */
+select race, count(1)from demographics group by race order by count(1) desc;:
+
+SQL: Right and Left:
+/*  SQL  */
+
+select substr(project,1,x.commits) project , RIGHT(address ,x.contributors) address
+ from (select * from repositories )x;:
+
+Coloured Triangles:
+def triangle (row , defl={'R' , 'B' , 'G'}):
+    row = row.replace (' ' , '')
+
+    if len (row) == 1: return row
+    if len(set(row)) == 1: return ''.join(set(row))
+    row_out = ''
+    for num in range (len (row) - 1):
+        if row[ num ] == row[ num + 1 ]: row_out += row[ num ]
+        else: row_out += ''.join ((defl - set ([ row[ num ] , row[ num + 1 ] ])))
+    op = triangle (row_out)
+    if op: return op:
+
+Square sums (simple):
+from math import sqrt
+from copy import deepcopy
+
+def sub_prog(num,req_dict,Out_list,flag_dict,perf_sqrs):
+    flag_dict[num]=False
+    if len(Out_list)==0:
+        Out_list.append(num)
+    if num + Out_list[-1] in perf_sqrs and num !=Out_list[-1]:
+        Out_list.append(num)
+    for x in req_dict[num]:
+        if flag_dict[x]:
+            sub_prog(x,req_dict,Out_list,flag_dict,perf_sqrs)
+            if len(Out_list)==len(req_dict):
+                return Out_list
+            popped=Out_list.pop()
+            flag_dict[popped]=True
+    
+    # return Out_list
+        
+def square_sums_row(org):
+    nums_sqs = [n for n in range (2*org)]
+    nums = [x for x in range(1,org+1)]
+    perf_sqrs = [x for x in nums_sqs if int(sqrt(x))**2==x]
+    req_dict  = {}
+    Out_list  = []
+    flag_dict = {}
+    
+    # making mapped dict
+    for n in nums:
+        req_dict[n]=[x for x in nums if n!=x and x+n in perf_sqrs]
+    
+    # making flag dictionary
+    for num in nums:
+        flag_dict[num]=True
+    
+    flag_dict_cpy = deepcopy(flag_dict)
+    
+    for num in nums:
+        if sub_prog(num,req_dict,Out_list,flag_dict,perf_sqrs):
+            return Out_list
+        else:
+            flag_dict=deepcopy(flag_dict_cpy)
+            Out_list=[]
+    
+    return False:
+
+Countries Capitals for Trivia Night (SQL for Beginners #6):
+-- Your solution here
+select capital from countries where continent like 'Afri%a'
+and country like 'E%' order by capital limit 3;:
+
+Basic Calculator:
+def calculate(num1, operation, num2): 
+    operators = ['+','-','/','//','*','%']
+    
+    
+    if operation not in operators:
+        return None
+    try:
+        return eval(str(num1)+operation+str(num2))
+    except ZeroDivisionError:
+        return None:
+
+Simple Pig Latin:
+import string
+puncs = string.punctuation
+
+def pig_it(text):
+    req_list=[]
+    for letter in text.split():
+        
+        if letter not in puncs: req_list.append(letter[1:]+letter[0]+'ay')
+        else: req_list.append(letter)
+    
+    return' '.join(letter for letter in req_list):
+
+Calculating with Functions:
+def zero(x=0): #your code here
+    if not x:
+        return 0
+    else:
+        return eval('0' +x)
+        
+        
+def one(x=0): #your code here
+    if not x:
+        return 1
+    else:
+        return eval('1' +x)
+    
+
+def two(x=0): #your code here
+    if not x:
+        return 2
+    else:
+        return eval('2' +x)
+    
+
+def three(x=0): #your code here
+    if not x:
+        return 3
+    else:
+        return eval('3' +x)
+    
+
+def four(x=0): #your code here
+    if not x:
+        return 4
+    else:
+        return eval('4' +x)
+    
+
+def five(x=0): #your code here
+    if not x:
+        return 5
+    else:
+        return eval('5' +x)
+    
+
+def six(x=0): #your code here
+    if not x:
+        return 6
+    else:
+        return eval('6' +x)
+    
+
+def seven(x=0): #your code here
+    if not x:
+        return 7
+    else:
+        return eval('7' +x)
+    
+
+def eight(x=0): #your code here
+    if not x:
+        return 8
+    else:
+        return eval('8' +x)
+    
+
+def nine(x=0): #your code here
+    if not x:
+        return 9
+    else:
+        return eval('9' +x)
+    
+def plus(x): #your code here
+    return '+'+str(x)
+            
+def minus(x=0): #your code here
+    return '-'+str(x)
+
+def times(x=0): #your code here
+    return '*'+str(x)
+
+def divided_by(x=0): #your code here
+    return '//'+str(x):
+
+Find the unique number:
+def find_uniq(arr):
+    num = set(arr[1:])
+    if len(num) ==1:
+        return arr[0]
+    arry = [arr[0]]+[a for a in num]
+    if arry[0] != arry[1]:
+        if arry[1] != arry[2]:
+            return arry[1]
+        else:
+            return arry[0]
+    return arry[2]  # n: unique integer in the array:
+
+Sum of Digits / Digital Root:
+def digital_root(n):
+    summed = sum([int(num) for num in str(n)])
+    if len(str(summed)) == 1:
+        return summed
+    else:
+        return digital_root(summed):
+
+Minimum number of taxis:
+def min_num_taxis(requests):
+    pu, do = zip(*requests)
+    counter = 0
+    pu_list, do_list =[x for x in pu], [x for x in do]
+    pu_list.sort() 
+    do_list.sort()
+    for element in pu_list:
+        if element <= do_list[0]:
+            counter +=1
+        else:
+            del do_list[0]
+    return counter:
+
+Sum of pairs:
+def sum_pairs(l,s):
+    
+    fill_return={}
+    for num in l:
+        temp = s-num
+        if temp in fill_return.values():
+            return list((temp,num))
+        else:
+            fill_return[temp]=num 
+    
+    return None
+    
+    return None:
+
+Breaking chocolate problem:
+def breakChocolate(n, m):
+    if not n or not m:
+        return 0
+    if n<=0 and m <0:
+        return 0
+    
+    return (m-1) + ((n-1)*(m))
+    :
+
+Vasya - Clerk:
+def tickets(people):
+        
+        if people[0] != 25:
+            return 'NO'
+        
+        notes_25 = 1
+        notes_50 = 0
+                        
+        for note in people[1:]:
+            if note == 25:
+                notes_25 += 1
+                
+            if note == 50:
+                if not notes_25:
+                    return 'NO'
+                else:
+                    notes_50 += 1
+                    notes_25 -= 1
+            
+            if note == 100:
+                if not notes_25:
+                    return 'NO'
+                elif not notes_50 and notes_25 <= 2:
+                    return 'NO'
+                elif not notes_50:
+                    notes_25 -=3
+                else:
+                    notes_50 -= 1
+                    notes_25 -= 1
+                    
+        return 'YES':
+
+Square Every Digit:
+def square_digits(num):
+    return int(''.join(str(int(n)**2) for n in str(num))):
+
+Convert string to camel case:
+import re
+
+def to_camel_case(text):
+    liss = re.split('[- _]',text)
+    if text:
+        if text[0].isupper():
+            return ''.join(name.title() for name in liss)
+        else:
+            return liss[0]+ ''.join(name.title() for name in liss[1:])
+    else:
+        return '':
+
+Your order, please:
+def order(sentence):
+    lissy = []
+    for num in range(len(sentence.split(' '))):
+        lissy.append('')
+    print(lissy)
+    for name in sentence.split(' '):
+        for num in name:
+            if num.isdigit():
+                lissy[int(num)-1] = name
+                print(lissy)
+    return ' '.join( numm for numm in lissy if numm != ''):
+
+Complementary DNA:
+def DNA_strand(dna):
+    word = ''
+    for letter in dna:
+        if letter == 'A':
+            word+='T'
+        elif letter =='T':
+            word+='A'
+        elif letter == 'G':
+            word +='C'
+        else:
+            word+='G'    
+    return word:
+
+SQL Basics: Simple EXISTS:
+select id, name from departments
+where  exists  (select department_id from sales where 
+sales.department_id= departments.id and
+price>98);:
+
+Disemvowel Trolls:
+def disemvowel(string):
+    for letter in string:
+        if letter.lower() in ['a','e','i','o','u']:
+            string=string.replace(letter,'')
+    return string
+    
+print(disemvowel("This website is for losers LOL!")):
+
+Multiply:
+def multiply(a, b):
+  return a * b:
+

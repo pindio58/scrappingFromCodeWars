@@ -9,15 +9,16 @@
 # ===============================================================
 
 # import modules
+import sys
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
+from cfg.config import url, username, password
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome import options
 from selenium.webdriver.common.by import By
 import os
-import sys
-import pathlib
-sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
-from cfg.config import url, username, password
+
 
 # define few other things
 LOGINBYGITHUB = '//*[@id="new_user"]/button[1]'
@@ -27,10 +28,8 @@ DRIVERPATH = os.environ['DRIVERFULLPATH']
 EMAILFIELD = 'login_field'
 PASSWORDFIELD = 'password'
 service = Service(executable_path=DRIVERPATH)
-# This single line opens a (empty) browser
-browser = webdriver.Chrome(service=service)
-# comnet this
-browser.maximize_window()
+browser = webdriver.Chrome(service=service)                             # FYI, This single line opens a (empty) browser
+browser.maximize_window()                                                        # comment this when we browser goes headless
 
 
 class loggingIn:
@@ -45,7 +44,7 @@ class loggingIn:
         element.click()
         browser.implicitly_wait(2)
         # TODO: To take care of authorization when logged in too many times
-        
+
     # fill in details
     def loggedin(self, emailfield=EMAILFIELD, passwordfiled=PASSWORDFIELD):
         emailelement = browser.find_element(By.ID, value=emailfield)

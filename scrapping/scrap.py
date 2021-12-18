@@ -10,16 +10,22 @@
 
 
 # import modules
-from selenium.webdriver.common.by import By
 import sys
 import pathlib
-import re
 sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
 from viewprofile import viewprofile
+import re
+import time
+from selenium.webdriver.common.by import By
+
 
 # define few things
 repositories = []
 browser = viewprofile.browser
+filename = '/home/jeet/projects/scrappingFromCodeWars/allcodes.txt'
+
+with open(filename, 'w') as file:
+    file.write('Codes\n\n')
 
 
 class Scrapping:
@@ -31,18 +37,30 @@ class Scrapping:
         totalCompleted = '//*[@id="shell_content"]/div[5]/div/div[1]/ul/li[1]/a'
         numberOfRepos = browser.find_element(
             By.XPATH, value=totalCompleted).text
-        numberOfRepos = int(re.search(r'\d+', numberOfRepos).group())
-        solutions = '//*[@id="shell_content"]/div[5]/div/div[2]/div[{}]/div[1]/a'
+        numberOfRepos = int(re.search(r'\d+', numberOfRepos).group())+1
+        questionNames = '//*[@id="shell_content"]/div[5]/div/div[2]/div[{}]/div[1]/a'
+        questionSolutions = '//*[@id="shell_content"]/div[5]/div/div[2]/div[{}]/div[2]/pre/code'
+
         for i in range(1, numberOfRepos):
-            element = browser.find_element(By.XPATH, value=solutions.format(
-                i))
-            repositories.append(element.text)
+            questionName = browser.find_element(By.XPATH, value=questionNames.format(
+                i)).text
+            questionSolution = browser.find_element(By.XPATH, value=questionSolutions.format(
+                i)).text
+            repositories.append(questionName)
+            
+            with open(filename, 'a') as file:
+                file.write(str(questionName)+':\n')
+                file.write(str(questionSolution)+':\n\n')
+            time.sleep(0.5)
+
+        browser.close()
         return repositories
 
     def main(self):
-        repositories= self.scrapnames()
+        repositories = self.scrapnames()
         return repositories
 
-if __name__=='__main__':
-    scrap=Scrapping()
+
+if __name__ == '__main__':
+    scrap = Scrapping()
     scrap.main()

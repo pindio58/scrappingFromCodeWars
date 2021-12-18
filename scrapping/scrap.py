@@ -27,7 +27,7 @@ class Scrapping:
     def __init__(self):
         pass
 
-    def scraps(self):
+    def scrapnames(self):
         totalCompleted = '//*[@id="shell_content"]/div[5]/div/div[1]/ul/li[1]/a'
         numberOfRepos = browser.find_element(
             By.XPATH, value=totalCompleted).text
@@ -40,9 +40,9 @@ class Scrapping:
         return repositories
 
     def main(self):
-        repositories= self.scraps()
+        repositories= self.scrapnames()
         return repositories
-        
+
 if __name__=='__main__':
     scrap=Scrapping()
     scrap.main()

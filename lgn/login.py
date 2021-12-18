@@ -42,7 +42,8 @@ class loggingIn:
         element = browser.find_element(By.XPATH, value=LOGINBYGITHUB)
         element.click()
         browser.implicitly_wait(2)
-
+        # TODO: To take care of authorization when logged in too many times
+        
     # fill in details
     def loggedin(self,emailfield=EMAILFIELD,passwordfiled=PASSWORDFIELD):
         emailelement = browser.find_element(By.ID, value=emailfield)

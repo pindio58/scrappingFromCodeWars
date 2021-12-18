@@ -1,7 +1,6 @@
 
-# TODo
-# To take care of authorization
-# Close browser 
+# TODO : Close browser  at last
+
 
 # import modules
 import sys

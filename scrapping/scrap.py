@@ -23,12 +23,7 @@ from viewprofile import viewprofile
 # define few things
 repositories = []
 browser = viewprofile.browser
-# filename = '/home/jeet/projects/scrappingFromCodeWars/allcodes.txt'
 loc = local()
-
-# with open(filename, 'w') as file:
-#     file.write('Codes\n\n')
-
 
 class Scrapping:
 
@@ -46,16 +41,18 @@ class Scrapping:
 
         for i in range(1, numberOfRepos):
             language = browser.find_element(By.XPATH, value=languages.format(
-                i)).text
-            language = language.replace(':', '')
+                i)).text.replace(':', '')
             questionName = browser.find_element(By.XPATH, value=questionNames.format(
                 i)).text.replace(' ','_').replace('-','_')
             questionSolution = browser.find_element(By.XPATH, value=questionSolutions.format(
                 i)).text
-            repositories.append(questionName)
+            
+            # repositories.append(questionName)                                                                   # will be used furtther
 
             loc.createDirAndFiles(language, questionName, questionSolution)
+            time.sleep(2)
 
+            
         browser.close()
         return repositories
 

@@ -17,7 +17,7 @@ from viewprofile.viewprofile import followedSection
 # define few things
 browser = scrap.browser
 
-
+# Not used atm
 class myexception(Exception):
     """Raise for my specific kind of exception"""
 

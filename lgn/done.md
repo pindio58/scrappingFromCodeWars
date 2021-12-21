@@ -1,19 +1,42 @@
-# Description
+###Overview
 
-There is an array with some numbers. All numbers are equal except for one. Try to find it!
+### Description
 
-```python
-find_uniq([ 1, 1, 1, 2, 1, 1 ]) == 2
-find_uniq([ 0, 0, 0.55, 0, 0 ]) == 0.55
+
+Given a `posts` table that contains a `created_at` timestamp column write a query that returns a first date of the month, a number of posts created in a given month and a month-over-month growth rate.
+
+
+The resulting set should be ordered chronologically by `date`.
+
+
+**Note:**
+
+
+* percent growth rate can be negative
+* percent growth rate should be rounded to one digit after the decimal point and immediately followed by a percent symbol "%". See the desired output below for the reference.
+
+
+### Desired Output
+
+
+The resulting set should look similar to the following:
+
+
+
+```SQL
+date       | count | percent_growth
+-----------+-------+---------------
+2016-02-01 |   175 |           null
+2016-03-01 |   338 |          93.1%
+2016-04-01 |   345 |           2.1%
+2016-05-01 |   295 |         -14.5%
+2016-06-01 |   330 |          11.9%
+...
 
 ```
 
-It’s guaranteed that array contains at least 3 numbers.
+* date - (DATE) a first date of the month
+* count - (INT) a number of posts in a given month
+* percent_growth - (TEXT) a month-over-month growth rate expressed in percents
 
-The tests contain some very huge arrays, so think about performance.
 
-This is the first kata in series:
-
-1. Find the unique number (this kata)
-2. [Find the unique string](https://www.codewars.com/kata/585d8c8a28bc7403ea0000c3)
-3. [Find The Unique](https://www.codewars.com/kata/5862e0db4f7ab47bed0000e5)

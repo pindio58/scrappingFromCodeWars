@@ -1,8 +1,9 @@
 from pathlib import Path
 
+
 home = str(Path.home())
 home=home+'/codewarsProjects'
-MAPPING = {'Python': '.py', 'SQL': '.sql', 'Java': '.java'}                                     
+MAPPING = {'Python': '.py', 'SQL': '.sql', 'Java': '.java','Shell':'.sh'}                                     
 # TODO: get rid of hardcode MAPPING
 
 class local:
@@ -17,7 +18,7 @@ class local:
 
         with open(dirName+'/app'+MAPPING.get(language,'.txt') ,'w') as file:        # create the file(s)
             file.write(questionSolution)
-
+        return dirName
 
 if __name__=='__main__':
     pass

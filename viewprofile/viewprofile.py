@@ -34,33 +34,33 @@ class followedSection:
     def clickOnMyAccountIcon(self):
         hover = browser.find_element(By.XPATH, HOVER)
         browser.implicitly_wait(10)
-        print("Hover is visible? " + str(hover.is_displayed()))
+        # print("Hover is visible? " + str(hover.is_displayed()))
         hover.click()
 
     def clickOnViewProfile(self):
         viewpr = browser.find_element(By.XPATH, VIEWPROFILE)
         browser.implicitly_wait(10)
-        print("View profile is visible? " + str(viewpr.is_displayed()))
+        # print("View profile is visible? " + str(viewpr.is_displayed()))
         viewpr.click()
 
     def clickOnSolutionsTab(self):
         solution = browser.find_element(By.XPATH, SOLUTION)
         browser.implicitly_wait(10)
-        print("Solution is visible? " + str(solution.is_displayed()))
+        # print("Solution is visible? " + str(solution.is_displayed()))
         solution.click()
 
     def scrollTillAllReposLoaded(self):
         initialheight = browser.execute_script(
             "return document.body.scrollHeight")
-        print('First Height: ', initialheight)
+        # print('First Height: ', initialheight)
         while True:
             browser.execute_script(
                 "window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(1)
+            time.sleep(2)
             # browser.implicitly_wait(2)
             newheight = browser.execute_script(
                 "return document.body.scrollHeight")
-            print('Next Height: ', newheight)
+            # print('Next Height: ', newheight)
             if newheight == initialheight:
                 break
             else:

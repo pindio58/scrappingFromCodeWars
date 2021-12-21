@@ -73,8 +73,9 @@ class loggingIn:
 
     def main(self):
         self.signInWithGitHub(url, LOGINBYGITHUB)
-        # self.loggedin(EMAILFIELD, PASSWORDFIELD)
-        self.loggedinusingCookies()
+        self.loggedin(EMAILFIELD, PASSWORDFIELD)
+        time.sleep(2)
+        # self.loggedinusingCookies()
 
 if __name__ == '__main__':
     logi = loggingIn()

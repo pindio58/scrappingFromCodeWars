@@ -38,4 +38,4 @@ except (NoSuchWindowException, WebDriverException) as e:
     print('Chrome has closed immaturely')
 
 # print
-print(repositories)
+# print(repositories)

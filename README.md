@@ -43,4 +43,4 @@ There are two different ways to login:
 
 * After successfully running it, a nice directory will be created like below:
   
-<img src="img/struct.png?raw=true" alt="drawing" width="700" align="right"/>
+<img src="img/struct.png?raw=true" alt="drawing" width="200" align="left"/>

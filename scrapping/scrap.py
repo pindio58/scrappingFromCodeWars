@@ -56,7 +56,7 @@ class Scrapping:
                 ele = ele.replace('```', '```'+language, 1)
             if '\\' in ele:
                 ele = ele.replace('\\', '')
-            with open('done.md', 'w') as file:
+            with open(fileFullPath, 'w') as file:
                 file.write(ele)
 
     def scrapAndSaveLocal(self):
@@ -72,10 +72,8 @@ class Scrapping:
 
         
         for i in range(1, numberOfRepos):
-            print('first: ',i)
             language = browser.find_element(By.XPATH, value=languages.format(
                 i)).text.replace(':', '')
-            print(i)
             questionName = browser.find_element(By.XPATH, value=questionNames.format(
                 i)).text.replace(' ', '_').replace('-', '_')
             questionSolution = browser.find_element(By.XPATH, value=questionSolutions.format(
@@ -86,12 +84,11 @@ class Scrapping:
             # repositories.append(questionName)                                                                   # will be used furtther
 
             # create all required directories and code files
-            print('here: ',i)
             dirName = loc.createDirAndFiles(
                 language, questionName, questionSolution)
             
             # time.sleep(0.7)
-            print(questionName)
+            print('{}) {}'.format(i,questionName))
             
 
             # call the function to generate README files

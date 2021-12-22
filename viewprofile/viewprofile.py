@@ -8,7 +8,7 @@
 # Dec 18, 2021     Bhupinderjit Singh       Initial Version
 # ===============================================================
 
-# TODO: Replace time module with impleict wait/ Expected consditions
+# TODO: Replace time module with implict wait/ Expected conditions
 
 # import modules
 import sys

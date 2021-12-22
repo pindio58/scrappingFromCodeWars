@@ -1,0 +1,6 @@
+selenium == 4.1.0
+types-selenium == 3.141.6
+requests == 2.26.0
+types-requests == 2.26.1
+bs4 == 0.0.1
+markdownify == 0.10.1

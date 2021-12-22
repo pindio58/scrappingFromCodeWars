@@ -9,45 +9,52 @@
 # Dec 20,2021      Bhupinderjit Singh       Chnaged login method using cookies , since Chrome wasn't allowing bot to login
 # ===============================================================
 
-import pathlib
 # import modules
+import pathlib
 import sys
 sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
-import os
-import time
-from csv import DictReader
-
-from cfg.config import password, url, username
-from selenium import webdriver
-from selenium.webdriver.chrome import options
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome import options
+from selenium import webdriver
+from cfg.config import password, url, username
+from csv import DictReader
+import time
+import os
+from getpass import getpass
 
-# define few other things
-LOGINBYGITHUB :str= '//*[@id="new_user"]/button[1]'
-EMAILPATH :str= '//*[@id="user_email"]'
-PASSWORDPATH :str= '//*[@id="user_password"]'
-DRIVERPATH :str = os.environ['DRIVERFULLPATH']
-EMAILFIELD :str= 'login_field'
-PASSWORDFIELD :str= 'password'
+# define few static things that will be used as we move forward
+LOGINBYGITHUB: str = '//*[@id="new_user"]/button[1]'
+EMAILPATH: str = '//*[@id="user_email"]'
+PASSWORDPATH: str = '//*[@id="user_password"]'
+DRIVERPATH: str = os.environ['DRIVERFULLPATH']
+EMAILFIELD: str = 'login_field'
+PASSWORDFIELD: str = 'password'
+COOKIESFILE=str(pathlib.Path(__file__).parent.resolve())
+COOKIESFILE=COOKIESFILE+'cookies.csv'
 
-options : options= webdriver.ChromeOptions()
+# start the browser
+options = webdriver.ChromeOptions()
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
-service = Service(executable_path=DRIVERPATH)
-# FYI, This single line opens a (empty) browser
+# options.add_argument('headless')                                                                # Comment this to go headless
+prefs = {"credentials_enable_service": False,
+         "profile.password_manager_enabled": False}
+options.add_experimental_option("prefs", prefs)
+service = Service(executable_path=DRIVERPATH)                                   # FYI, This single line opens a (empty) browser
 browser = webdriver.Chrome(service=service, options=options)
-# comment this when we browser goes headless
 browser.maximize_window()
 
 
 class loggingIn:
 
     def __init__(self):
-        pass
-
+        self.username = input('Enter your GitHub username: ')
+        self.password = getpass('Please enter your password: ')
+        # FIXME: exit from asking username/ password popup if browser closed explictly
     #  click on github
     def signInWithGitHub(self, url=url, LOGINBYGITHUB=LOGINBYGITHUB):
+        '''This method will be used to click on  GitHub option to log in'''
         browser.get(url)
         element = browser.find_element(By.XPATH, value=LOGINBYGITHUB)
         element.click()
@@ -56,17 +63,21 @@ class loggingIn:
 
     # fill in details
 
-    def loggedin(self, emailfield=EMAILFIELD, passwordfiled=PASSWORDFIELD):
+    def logInUsingUserPass(self, emailfield=EMAILFIELD, passwordfiled=PASSWORDFIELD):
+        '''This will be used to fill in the details such as username, password.
+        Another way to enter the username password is adding these details in config file and import them here however you need to be
+        careful since password will be openly displayed!'''
         emailelement = browser.find_element(By.ID, value=emailfield)
         passwordelement = browser.find_element(By.ID, value=passwordfiled)
-        emailelement.send_keys(username)
+        emailelement.send_keys(self.username)
         time.sleep(1)
-        passwordelement.send_keys(password)
+        passwordelement.send_keys(self.password)
         time.sleep(2)
         passwordelement.submit()
 
-    def loggedinusingCookies(self):
-        with open('/home/jeet/projects/scrappingFromCodeWars/lgn/cookies.csv', encoding='utf-8') as file:
+    def loggedInUsingCookies(self):
+        '''This is another method to login. Rather than entering/asking username , password, it will use stored cookies of your GitHub account'''
+        with open(COOKIESFILE, encoding='utf-8') as file:
             dict_read = DictReader(file)
             list_of_dicts = list(dict_read)
             for i in list_of_dicts:
@@ -75,7 +86,7 @@ class loggingIn:
 
     def main(self):
         self.signInWithGitHub(url, LOGINBYGITHUB)
-        self.loggedin(EMAILFIELD, PASSWORDFIELD)
+        self.logInUsingUserPass(EMAILFIELD, PASSWORDFIELD)
         time.sleep(2)
         # self.loggedinusingCookies()
 
@@ -83,9 +94,3 @@ class loggingIn:
 if __name__ == '__main__':
     logi = loggingIn()
     logi.main()
-
-# with open('/home/jeet/projects/scrappingFromCodeWars/lgn/cookies.csv',encoding='utf-8') as file:
-#     dict_read=DictReader(file)
-#     list_of_dicts=list(dict_read)
-#     for i in list_of_dicts:
-#         print(i)

@@ -1,6 +1,6 @@
 
 # FIXME: mask the password
 
-url='https://www.codewars.com/users/sign_in'
-username = 'pindio58'
-password = 'Github1!singh'
+url: str = 'https://www.codewars.com/users/sign_in'
+username: str = 'pindio58'
+password: str = 'Github1!singh'

@@ -42,7 +42,8 @@ class Scrapping:
         if len(soup.find_all('pre'))>1:
             for pre in soup.find_all('pre'):
                 if pre.code.has_attr('class'):
-                    if ('sql' not in pre.code.attrs['class'][0].lower()) and ('sql' not in pre.code.attrs['class'][0].lower()) and ('java' not in pre.code.attrs['class'][0].lower()):
+                    # if not ( ('sql'  in pre.code.attrs['class'][0].lower()) or ('python'  in pre.code.attrs['class'][0].lower()) or ('java'  in pre.code.attrs['class'][0].lower())):
+                    if  ( not (language.lower() in pre.code.attrs['class'][0].lower())) or 'javascript' in pre.code.attrs['class'][0].lower():    # exception for javascript
                         pre.decompose()
         
         html = markdownify(str(soup))

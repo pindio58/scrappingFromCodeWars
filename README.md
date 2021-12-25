@@ -32,7 +32,7 @@ There are two different ways to login:
 * **Username and password:** Here also, two ways.
 
   * Either set the username and password in `config.py` under cfg folder.
-  * By default, it will ask for username and password on CLI.
+  * If left empty in `config.py`, it will ask for username and password on console.
 * **Cookies:**
   * For this method, you will need to store cookies into a csv file (`cookies.csv`) under `lgn` directory when you have manually logged in. Please refer [here](https://www.youtube.com/watch?v=vhjKJ7huN-w) how to do it.
   * Once stored, please go to `login.py` file and do the follwoing:

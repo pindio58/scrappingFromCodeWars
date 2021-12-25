@@ -45,12 +45,16 @@ service = Service(executable_path=DRIVERPATH)                                   
 browser = webdriver.Chrome(service=service, options=options)
 browser.maximize_window()
 
-
+# Username and password
+if not username:
+    username =  input('Enter your GitHub username: ')
+if not password:
+    password =  getpass('Please enter your password: ')
 class loggingIn:
 
     def __init__(self):
-        self.username = input('Enter your GitHub username: ')
-        self.password = getpass('Please enter your password: ')
+        self.username = username
+        self.password = password
         # FIXME: exit from asking username/ password popup if browser closed explictly
     #  click on github
     def signInWithGitHub(self, url=url, LOGINBYGITHUB=LOGINBYGITHUB):

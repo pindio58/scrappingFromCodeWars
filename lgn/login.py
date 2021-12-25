@@ -50,6 +50,8 @@ if not username:
     username =  input('Enter your GitHub username: ')
 if not password:
     password =  getpass('Please enter your password: ')
+
+    
 class loggingIn:
 
     def __init__(self):

@@ -28,18 +28,25 @@ def is_git_repo(path):
 
 # inialise if not already done(basicallly if it is first time)
 if not is_git_repo(fullPath):
+    os.chdir(fullPath)
+    print('First')
     git.Repo.init(fullPath)
+    print('second')
     subprocess.run(['git', 'branch', '-M', 'main'])
+    print('third')
     subprocess.run(['git', 'remote', 'add', 'origin', remoteURL])
+    print('fourht')
     subprocess.run(['curl', '-i', '-H', '"Authorization: token {}"'.format(token), '-d',
-                   '{"name": "{}",  "auto_init": "{}",  "private": "{}",} https: // api.github.com/user/repos'.format(folderName, autoInit, privateRepo)])
-
+                   '{"name": "{}",  "auto_init": "{}",  "private": "{}"} https: // api.github.com/user/repos'.format(folderName, autoInit, privateRepo)])
+    print('DOne')
 
 # add new files and push them over
 subprocess.run(['git', 'add', '.'])
+print('Again First')
 subprocess.run(['git', 'commit', '-m', 'added new files'])
+print('Again Second')
 subprocess.run('git push -u origin main', shell=True)
-
+print('Again done')
 # steps
 # echo "# testttttt" >> README.md
 # git init

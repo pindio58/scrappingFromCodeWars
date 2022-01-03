@@ -38,7 +38,7 @@ if not is_git_repo(fullPath):
 # add new files and push them over
 subprocess.run(['git', 'add', '.'])
 subprocess.run(['git', 'commit', '-m', 'added new files'])
-subprocess.run('git push -u origin main')
+subprocess.run('git push -u origin main', shell=True)
 
 # steps
 # echo "# testttttt" >> README.md

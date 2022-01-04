@@ -12,7 +12,7 @@ from lgn.login import loggingIn
 from scrapping.scrap import Scrapping
 from scrapping import scrap
 from selenium.common.exceptions import NoSuchElementException, NoSuchWindowException, WebDriverException
-
+from gitHubPart.pushToGitHub import createAndPushToGitHub
 
 # define few things
 browser = scrap.browser
@@ -28,12 +28,15 @@ class myexception(Exception):
 logi = loggingIn()
 follow = followedSection()
 scrap = Scrapping()
+push = createAndPushToGitHub()
 
 # call their respective "main" methods
 try:
     logi.main()
     follow.main()
     repositories = scrap.main()
+    push.final()
+    
 except NoSuchElementException:
     browser.close()
 except (NoSuchWindowException, WebDriverException) as e:

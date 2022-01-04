@@ -12,7 +12,7 @@ from cfg.config import folderName, username
 # path of our project folder and take token
 fullPath = str(pathlib.Path.home().joinpath(folderName))
 token = os.environ['CODEWARS_GITHUB_TOKEN']
-IS_PRIVATE = False                                                        # Change this accordingly whether the pushed repo should be public or private
+IS_PRIVATE = False                                                        # Change this accordingly whether the  repo should be public or private
 
 
 class createAndPushToGitHub:

@@ -3,8 +3,8 @@ import pathlib
 from github.GithubException import UnknownObjectException
 from github import Github
 import subprocess
-import os
 import sys
+import os
 sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
 from cfg.config import folderName, username
 

@@ -12,10 +12,10 @@ from cfg.config import folderName, username
 # path of our project folder and take token
 fullPath = str(pathlib.Path.home().joinpath(folderName))
 token = os.environ['CODEWARS_GITHUB_TOKEN']
-IS_PRIVATE = True                                                        # Change this accordingly whether the pushed repo should be public or private
+IS_PRIVATE = False                                                        # Change this accordingly whether the pushed repo should be public or private
 
 
-class pushToGitHub:
+class createAndPushToGitHub:
 
     def __init__(self):
         pass
@@ -56,7 +56,7 @@ class pushToGitHub:
 
     def add_commit_push(self, username, token, folderName):
         '''After changnig path to the required folder, will add and push all new,modified files'''
-        # FIXME  mask the output since it is showing the token on screen
+        # FIXME  mask the output since it is showing the token on screen [logging module should be used overall]
         subprocess.call(['git', 'add', '.'])
         subprocess.call(
             ['git', 'commit', '-m', '{}'.format('adding new files')])
@@ -71,5 +71,5 @@ class pushToGitHub:
 
 
 if __name__ == '__main__':
-    push = pushToGitHub()
+    push = createAndPushToGitHub()
     push.final()

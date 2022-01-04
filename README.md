@@ -26,6 +26,7 @@ There are technically four steps:
 
 * Install the dependencies from `requirements.txt` file.
 * Download the chrome driver and set the path to environament variable, named `DRIVERFULLPATH`.
+* Generate a Personal Access token and set an environment variable `CODEWARS_GITHUB_TOKEN`. Please refere [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) how to do it.
 * Run `origin.py` under `final` folder.
 
 ## Login Methods
